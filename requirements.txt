@@ -1,0 +1,12 @@
+# GPU-enabled PyTorch so embedding runs on the GPU (corpus build + query batch).
+# On a fresh environment, `pip install -r requirements.txt` pulls a CUDA build of torch:
+# the --extra-index-url points pip at PyTorch's wheel server (CUDA 12.1 wheels, compatible
+# with any CUDA 12.x / NVIDIA driver >= 525). If `nvidia-smi` reports CUDA 11.8, change the
+# suffix to cu118; for 12.4 use cu124. Remove the line entirely for a CPU-only machine.
+# Note: pip will NOT replace a torch that is already installed — start from a clean env, or
+# the GPU build won't be picked up.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+numpy>=1.24
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
