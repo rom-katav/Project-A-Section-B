@@ -55,4 +55,4 @@ python scripts/eval_public.py
 
 Public GitHub repo with this code, the **required** `artifacts/`, and the presentation video.
 
-**Video:** _<[add link here](https://technion.zoom.us/rec/share/SZHcukFCpC09Mjb118iUn7VrK3HmeKoq7YzEsKiOSY1GGUOPeHiE-IK9_PPSFw.5FGFGcaBwWidpvy2?startTime=1782058229000)>_
+**Video:** _<[Video Link](https://technion.zoom.us/rec/share/SZHcukFCpC09Mjb118iUn7VrK3HmeKoq7YzEsKiOSY1GGUOPeHiE-IK9_PPSFw.5FGFGcaBwWidpvy2?startTime=1782058229000)>_
