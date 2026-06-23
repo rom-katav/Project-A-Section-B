@@ -7,12 +7,29 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 import faiss
 import numpy as np
 
+import urllib.request
+import os
+
 _model = None
 _cross_encoder = None
 _index = None
 _mapping = None
 _chunks_text = None
 _bm25 = None
+
+def _resolve_lfs_pointers(artifacts_dir: Path):
+    base_url = "https://github.com/rom-katav/Project-A-Section-B/raw/master/artifacts/"
+    for fname in ["faiss_index.bin", "mapping.json", "chunks.json", "bm25.pkl"]:
+        fpath = artifacts_dir / fname
+        if not fpath.exists():
+            continue
+            
+        if fpath.stat().st_size < 2000:
+            with open(fpath, "rb") as f:
+                header = f.read(100)
+            if b"version https://git-lfs.github.com/spec/v1" in header:
+                print(f"Downloading real {fname} from GitHub LFS (this may take a moment)...")
+                urllib.request.urlretrieve(base_url + fname, fpath)
 
 def init_pipeline():
     global _model, _cross_encoder, _index, _mapping, _chunks_text, _bm25
@@ -21,6 +38,8 @@ def init_pipeline():
         
     base_dir = Path(__file__).resolve().parent
     artifacts_dir = base_dir / "artifacts"
+    
+    _resolve_lfs_pointers(artifacts_dir)
     
     # Load Models
     _model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
